@@ -1,0 +1,53 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { logout } from "@/app/(auth)/actions";
+
+function initialsFrom(nameOrEmail: string) {
+  const trimmed = nameOrEmail.trim();
+  if (!trimmed) return "FC";
+  const parts = trimmed.split(/\s+/);
+  if (parts.length > 1) {
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  return trimmed.slice(0, 2).toUpperCase();
+}
+
+export function TopBar({ displayName }: { displayName: string }) {
+  const router = useRouter();
+
+  return (
+    <header className="flex items-center justify-between border-b border-border bg-background px-4 py-3 md:px-8">
+      <div className="md:hidden font-heading text-base font-semibold">
+        FORCOACH
+      </div>
+      <div className="hidden md:block" />
+      <DropdownMenu>
+        <DropdownMenuTrigger className="flex items-center gap-2 rounded-full outline-none">
+          <Avatar className="size-8">
+            <AvatarFallback className="bg-accent text-accent-foreground text-xs">
+              {initialsFrom(displayName)}
+            </AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => router.push("/settings")}>
+            Profile
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive" onClick={() => logout()}>
+            Log out
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </header>
+  );
+}
