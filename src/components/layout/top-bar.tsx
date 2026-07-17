@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { ChevronDown } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -31,12 +32,13 @@ export function TopBar({ displayName }: { displayName: string }) {
       </div>
       <div className="hidden md:block" />
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center gap-2 rounded-full outline-none">
+        <DropdownMenuTrigger className="group flex items-center gap-1.5 rounded-full outline-none">
           <Avatar className="size-8">
             <AvatarFallback className="bg-accent text-accent-foreground text-xs">
               {initialsFrom(displayName)}
             </AvatarFallback>
           </Avatar>
+          <ChevronDown className="size-4 text-muted-foreground transition-transform group-aria-expanded:rotate-180" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => router.push("/settings")}>
