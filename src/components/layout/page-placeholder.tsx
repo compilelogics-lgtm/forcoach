@@ -1,4 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles } from "lucide-react";
 
 export function PagePlaceholder({
   title,
@@ -14,13 +16,17 @@ export function PagePlaceholder({
         <p className="text-muted-foreground mt-1">{description}</p>
       </div>
       <Card>
-        <CardHeader>
-          <CardTitle className="text-base text-muted-foreground font-normal">
-            Coming in a later chunk
+        <CardHeader className="flex flex-row items-center gap-2">
+          <Sparkles className="size-4 text-accent" />
+          <CardTitle className="text-base font-normal text-muted-foreground">
+            Coming soon
           </CardTitle>
+          <Badge variant="secondary" className="ml-auto">
+            In development
+          </Badge>
         </CardHeader>
         <CardContent className="text-sm text-muted-foreground">
-          This section is scaffolded but not yet implemented.
+          We&apos;re actively building this feature. Check back soon for updates.
         </CardContent>
       </Card>
     </div>
