@@ -28,6 +28,7 @@ import { DashboardMock } from "@/components/marketing/dashboard-mock";
 import { EarningsMock } from "@/components/marketing/earnings-mock";
 import { StudiosMock } from "@/components/marketing/studios-mock";
 import { Reveal } from "@/components/marketing/reveal";
+import { HeroBackground } from "@/components/marketing/hero-background";
 
 const FEATURES = [
   {
@@ -147,35 +148,38 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="mx-auto max-w-5xl px-4 pt-16 pb-14 text-center sm:px-6 sm:pt-24">
-          <Reveal>
-            <Badge variant="secondary" className="mb-6">
-              Built for independent fitness coaches
-            </Badge>
-            <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-              The operating system for fitness coaches to manage their business
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-              Track your classes across every studio, calculate your earnings
-              automatically, and generate professional invoices — so you can
-              focus on coaching, not paperwork.
-            </p>
-            <div className="mt-8 flex flex-col items-center gap-3">
-              <Button
-                size="lg"
-                className="group"
-                render={
-                  <Link href="/register">
-                    Get Started
-                    <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
-                  </Link>
-                }
-              />
-              <p className="text-xs text-muted-foreground">
-                Free during early access — no credit card required.
+        <section className="relative overflow-hidden">
+          <HeroBackground />
+          <div className="relative mx-auto max-w-5xl px-4 pt-16 pb-14 text-center sm:px-6 sm:pt-24">
+            <Reveal>
+              <Badge variant="secondary" className="mb-6">
+                Built for independent fitness coaches
+              </Badge>
+              <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+                The operating system for fitness coaches to manage their business
+              </h1>
+              <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
+                Track your classes across every studio, calculate your earnings
+                automatically, and generate professional invoices — so you can
+                focus on coaching, not paperwork.
               </p>
-            </div>
-          </Reveal>
+              <div className="mt-8 flex flex-col items-center gap-3">
+                <Button
+                  size="lg"
+                  className="group"
+                  render={
+                    <Link href="/register">
+                      Get Started
+                      <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
+                    </Link>
+                  }
+                />
+                <p className="text-xs text-muted-foreground">
+                  Free during early access — no credit card required.
+                </p>
+              </div>
+            </Reveal>
+          </div>
         </section>
 
         {/* Dashboard mock */}
