@@ -1,21 +1,33 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { LayoutDashboard, CalendarDays, Building2 } from "lucide-react";
+import {
+  LayoutDashboard,
+  CalendarDays,
+  Building2,
+  Dumbbell,
+  Clock,
+  Wallet,
+  Hourglass,
+  TrendingUp,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const STATS = [
-  { label: "Classes", value: "63" },
-  { label: "Hours", value: "58.5" },
-  { label: "Earnings", value: "€5,715" },
-  { label: "Pending", value: "3" },
+  { label: "Classes", value: "63", icon: Dumbbell, trend: "+8%" },
+  { label: "Hours", value: "58.5", icon: Clock, trend: "+5%" },
+  { label: "Earnings", value: "€5,715", icon: Wallet, trend: "+12%" },
+  { label: "Pending", value: "3", icon: Hourglass, trend: null },
 ];
 
 const STUDIOS = [
-  { name: "Pilates House", pct: 42 },
-  { name: "Reform Lab", pct: 31 },
-  { name: "Flow Yoga Studio", pct: 18 },
+  { name: "Pilates House", pct: 42, color: "bg-accent" },
+  { name: "Reform Lab", pct: 31, color: "bg-foreground/60" },
+  { name: "Flow Yoga Studio", pct: 18, color: "bg-foreground/30" },
 ];
+
+const AREA_PATH =
+  "M0,45 25,42 50,38 75,30 100,32 125,20 150,18 175,10 200,12";
 
 export function DashboardMock() {
   const ref = useRef<HTMLDivElement>(null);
@@ -59,29 +71,81 @@ export function DashboardMock() {
             <Building2 className="size-3.5" />
             Studios
           </div>
+          <div className="mt-auto flex items-center gap-2 border-t border-sidebar-foreground/10 pt-3">
+            <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-sidebar-accent text-[10px] font-medium text-sidebar-accent-foreground">
+              JC
+            </div>
+            <div className="text-[10px] text-sidebar-foreground/60">
+              Jordan Cole
+            </div>
+          </div>
         </div>
         <div className="flex-1 space-y-4 p-5 sm:p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="font-heading text-sm font-semibold">
+                Good morning, Jordan
+              </div>
+              <div className="text-xs text-muted-foreground">
+                Here&apos;s your business this month.
+              </div>
+            </div>
+            <div className="hidden rounded-full bg-secondary px-2.5 py-1 text-[10px] font-medium text-secondary-foreground sm:block">
+              July 2026
+            </div>
+          </div>
+
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {STATS.map((s) => (
               <div
                 key={s.label}
                 className="rounded-lg border border-border bg-background p-3 transition-colors duration-300 hover:border-accent/40"
               >
-                <div className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                <div className="flex items-center justify-between">
+                  <s.icon className="size-3.5 text-accent" />
+                  {s.trend && (
+                    <span className="flex items-center gap-0.5 text-[9px] font-medium text-accent">
+                      <TrendingUp className="size-2.5" />
+                      {s.trend}
+                    </span>
+                  )}
+                </div>
+                <div className="mt-1.5 text-[10px] uppercase tracking-wide text-muted-foreground">
                   {s.label}
                 </div>
-                <div className="mt-1 font-heading text-lg font-semibold">
+                <div className="font-heading text-lg font-semibold">
                   {s.value}
                 </div>
               </div>
             ))}
           </div>
+
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-lg border border-border bg-background p-4">
-              <div className="text-xs font-medium text-muted-foreground">
-                Monthly income
+              <div className="flex items-center justify-between">
+                <div className="text-xs font-medium text-muted-foreground">
+                  Monthly income
+                </div>
+                <span className="text-xs font-semibold text-foreground">
+                  €5,715
+                </span>
               </div>
               <svg viewBox="0 0 200 60" className="mt-2 h-14 w-full" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="dash-area" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.28" />
+                    <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d={`${AREA_PATH} L200,60 L0,60 Z`}
+                  fill="url(#dash-area)"
+                  className={cn(
+                    "transition-opacity duration-700",
+                    inView ? "opacity-100" : "opacity-0",
+                  )}
+                  style={{ transitionDelay: "1.2s" }}
+                />
                 <polyline
                   fill="none"
                   stroke="var(--accent)"
@@ -107,7 +171,10 @@ export function DashboardMock() {
                     </div>
                     <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
                       <div
-                        className="h-full rounded-full bg-accent transition-[width] duration-1000 ease-out"
+                        className={cn(
+                          "h-full rounded-full transition-[width] duration-1000 ease-out",
+                          s.color,
+                        )}
                         style={{ width: inView ? `${s.pct}%` : "0%" }}
                       />
                     </div>
