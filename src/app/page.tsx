@@ -27,6 +27,7 @@ import { MarketingFooter } from "@/components/marketing/marketing-footer";
 import { DashboardMock } from "@/components/marketing/dashboard-mock";
 import { EarningsMock } from "@/components/marketing/earnings-mock";
 import { StudiosMock } from "@/components/marketing/studios-mock";
+import { Reveal } from "@/components/marketing/reveal";
 
 const FEATURES = [
   {
@@ -147,41 +148,46 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero */}
         <section className="mx-auto max-w-5xl px-4 pt-16 pb-14 text-center sm:px-6 sm:pt-24">
-          <Badge variant="secondary" className="mb-6">
-            Built for independent fitness coaches
-          </Badge>
-          <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-            The operating system for fitness coaches to manage their business
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Track your classes across every studio, calculate your earnings
-            automatically, and generate professional invoices — so you can
-            focus on coaching, not paperwork.
-          </p>
-          <div className="mt-8 flex flex-col items-center gap-3">
-            <Button
-              size="lg"
-              render={
-                <Link href="/register">
-                  Get Started
-                  <ArrowRight className="size-4" />
-                </Link>
-              }
-            />
-            <p className="text-xs text-muted-foreground">
-              Free during early access — no credit card required.
+          <Reveal>
+            <Badge variant="secondary" className="mb-6">
+              Built for independent fitness coaches
+            </Badge>
+            <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+              The operating system for fitness coaches to manage their business
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
+              Track your classes across every studio, calculate your earnings
+              automatically, and generate professional invoices — so you can
+              focus on coaching, not paperwork.
             </p>
-          </div>
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <Button
+                size="lg"
+                className="group"
+                render={
+                  <Link href="/register">
+                    Get Started
+                    <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
+                  </Link>
+                }
+              />
+              <p className="text-xs text-muted-foreground">
+                Free during early access — no credit card required.
+              </p>
+            </div>
+          </Reveal>
         </section>
 
         {/* Dashboard mock */}
         <section className="px-4 pb-20 sm:px-6">
-          <DashboardMock />
+          <Reveal delay={150}>
+            <DashboardMock />
+          </Reveal>
         </section>
 
         {/* Without / With comparison */}
         <section className="border-y border-border bg-secondary/40 px-4 py-16 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="font-heading text-3xl font-semibold">
               You didn&apos;t become a coach to do spreadsheets
             </h2>
@@ -189,9 +195,9 @@ export default function Home() {
               Coaching across multiple studios shouldn&apos;t mean juggling
               multiple systems.
             </p>
-          </div>
-          <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-border bg-background p-6">
+          </Reveal>
+          <Reveal delay={100} className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">
+            <div className="rounded-xl border border-border bg-background p-6 transition-shadow duration-300 hover:shadow-md">
               <div className="font-heading text-sm font-semibold text-muted-foreground">
                 Without FORCOACH
               </div>
@@ -204,7 +210,7 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-xl border border-accent/30 bg-background p-6">
+            <div className="rounded-xl border border-accent/30 bg-background p-6 transition-shadow duration-300 hover:shadow-md">
               <div className="font-heading text-sm font-semibold text-accent">
                 With FORCOACH
               </div>
@@ -217,12 +223,12 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Features */}
         <section id="features" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="font-heading text-3xl font-semibold">
               Everything your coaching business needs
             </h2>
@@ -230,20 +236,22 @@ export default function Home() {
               One place for your schedule, your hours, your earnings, and
               your invoices.
             </p>
-          </div>
+          </Reveal>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURES.map((feature) => (
-              <Card key={feature.title}>
-                <CardHeader>
-                  <feature.icon className="size-5 text-accent" />
-                  <CardTitle className="mt-2 text-base">
-                    {feature.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  {feature.description}
-                </CardContent>
-              </Card>
+            {FEATURES.map((feature, i) => (
+              <Reveal key={feature.title} delay={i * 80}>
+                <Card className="group h-full transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg">
+                  <CardHeader>
+                    <feature.icon className="size-5 text-accent transition-transform duration-300 group-hover:scale-110" />
+                    <CardTitle className="mt-2 text-base">
+                      {feature.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-sm text-muted-foreground">
+                    {feature.description}
+                  </CardContent>
+                </Card>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -251,7 +259,7 @@ export default function Home() {
         {/* Studio management detail row */}
         <section className="border-y border-border bg-secondary/40 px-4 py-20 sm:px-6">
           <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-2">
-            <div>
+            <Reveal>
               <h2 className="font-heading text-3xl font-semibold">
                 Manage every studio in one place
               </h2>
@@ -274,22 +282,24 @@ export default function Home() {
                   Contact info, notes, and reference IDs all in one card
                 </li>
               </ul>
-            </div>
-            <StudiosMock />
+            </Reveal>
+            <Reveal delay={150}>
+              <StudiosMock />
+            </Reveal>
           </div>
         </section>
 
         {/* How it works */}
         <section id="how-it-works" className="px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="font-heading text-3xl font-semibold">
               How it works
             </h2>
-          </div>
+          </Reveal>
           <div className="mx-auto mt-12 grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {STEPS.map((step) => (
-              <div key={step.number}>
-                <div className="font-heading text-sm font-semibold text-accent">
+            {STEPS.map((step, i) => (
+              <Reveal key={step.number} delay={i * 80} className="group">
+                <div className="font-heading text-sm font-semibold text-accent transition-transform duration-300 group-hover:translate-x-1">
                   {step.number}
                 </div>
                 <h3 className="mt-2 font-heading text-base font-semibold">
@@ -298,14 +308,14 @@ export default function Home() {
                 <p className="mt-1 text-sm text-muted-foreground">
                   {step.description}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>
 
         {/* Earnings detail row */}
         <section className="border-y border-border bg-secondary/40 px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="font-heading text-3xl font-semibold">
               See your numbers, not just your schedule
             </h2>
@@ -313,46 +323,45 @@ export default function Home() {
               A real financial snapshot of your coaching business, updated
               automatically as you teach.
             </p>
-          </div>
-          <div className="mt-12">
+          </Reveal>
+          <Reveal delay={150} className="mt-12">
             <EarningsMock />
-          </div>
+          </Reveal>
         </section>
 
         {/* Audience */}
         <section className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="font-heading text-3xl font-semibold">
               Built for coaches like you
             </h2>
-          </div>
+          </Reveal>
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {AUDIENCE.map((item) => (
-              <div
-                key={item.tag}
-                className="rounded-xl border border-border p-5"
-              >
-                <Badge variant="outline" className="mb-2">
-                  {item.tag}
-                </Badge>
-                <p className="text-sm text-muted-foreground">
-                  {item.description}
-                </p>
-              </div>
+            {AUDIENCE.map((item, i) => (
+              <Reveal key={item.tag} delay={i * 80}>
+                <div className="rounded-xl border border-border p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
+                  <Badge variant="outline" className="mb-2">
+                    {item.tag}
+                  </Badge>
+                  <p className="text-sm text-muted-foreground">
+                    {item.description}
+                  </p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </section>
 
         {/* FAQ */}
         <section className="border-y border-border bg-secondary/40 px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-2xl">
+          <Reveal className="mx-auto max-w-2xl">
             <h2 className="text-center font-heading text-3xl font-semibold">
               Frequently asked questions
             </h2>
             <Accordion className="mt-10 w-full">
               {FAQ.map((item) => (
                 <AccordionItem key={item.question} value={item.question}>
-                  <AccordionTrigger className="text-left">
+                  <AccordionTrigger className="text-left transition-colors hover:text-accent">
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">
@@ -361,12 +370,12 @@ export default function Home() {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
+          </Reveal>
         </section>
 
         {/* Final CTA */}
         <section className="bg-primary px-4 py-20 text-primary-foreground sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="font-heading text-3xl font-semibold">
               Ready to stop doing the math yourself?
             </h2>
@@ -378,15 +387,16 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="secondary"
+                className="group"
                 render={
                   <Link href="/register">
                     Get Started
-                    <ArrowRight className="size-4" />
+                    <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
                   </Link>
                 }
               />
             </div>
-          </div>
+          </Reveal>
         </section>
       </main>
 

@@ -6,7 +6,7 @@ const STUDIOS = [
 
 export function StudiosMock() {
   return (
-    <div className="mx-auto max-w-lg overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-[0_20px_60px_-15px_rgba(28,28,28,0.25)] sm:p-6">
+    <div className="mx-auto max-w-lg overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-[0_20px_60px_-15px_rgba(28,28,28,0.25)] transition-shadow duration-500 hover:shadow-[0_28px_70px_-15px_rgba(28,28,28,0.32)] sm:p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
           <div className="font-heading text-sm font-semibold">Studios</div>
@@ -20,7 +20,7 @@ export function StudiosMock() {
         {STUDIOS.map((studio) => (
           <div
             key={studio.name}
-            className={`rounded-lg border border-border p-3 ${
+            className={`rounded-lg border border-border p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-sm ${
               studio.status === "Inactive" ? "opacity-60" : ""
             }`}
           >

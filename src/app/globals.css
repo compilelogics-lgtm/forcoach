@@ -137,3 +137,25 @@
     @apply font-heading;
   }
 }
+
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: var(--line-length, 400);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw-line {
+  stroke-dasharray: var(--line-length, 400);
+  stroke-dashoffset: var(--line-length, 400);
+  animation: draw-line 1.6s ease-out 0.3s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-draw-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
