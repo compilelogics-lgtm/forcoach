@@ -37,7 +37,11 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const pathname = request.nextUrl.pathname;
-  const isPublicPath = PUBLIC_PATHS.some((path) => pathname.startsWith(path));
+  // "/" is public (the marketing landing page) but must be an exact match --
+  // every path starts with "/", so using startsWith() here would make every
+  // route public and defeat the auth guard entirely.
+  const isPublicPath =
+    pathname === "/" || PUBLIC_PATHS.some((path) => pathname.startsWith(path));
 
   if (!user && !isPublicPath) {
     const url = request.nextUrl.clone();
