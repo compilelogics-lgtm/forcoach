@@ -7,6 +7,13 @@ import {
   ArrowRight,
   X,
   Check,
+  TrendingUp,
+  Dumbbell,
+  Zap,
+  Wind,
+  Users,
+  HelpCircle,
+  MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -74,21 +81,25 @@ const WITH = [
 const STEPS = [
   {
     number: "01",
+    icon: Building2,
     title: "Add your studios",
     description: "Enter the studios you coach at and how each one pays you.",
   },
   {
     number: "02",
+    icon: CalendarDays,
     title: "Import your schedule",
     description: "Connect Google Calendar or upload a CSV of your classes.",
   },
   {
     number: "03",
+    icon: TrendingUp,
     title: "Track earnings automatically",
     description: "Hours and income update themselves as your schedule changes.",
   },
   {
     number: "04",
+    icon: FileText,
     title: "Generate invoices",
     description: "Pick a studio and date range, and download a ready invoice.",
   },
@@ -97,44 +108,53 @@ const STEPS = [
 const AUDIENCE = [
   {
     tag: "Pilates",
+    icon: Dumbbell,
     description: "Reformer, mat, and tower classes across multiple studios.",
   },
   {
     tag: "Lagree",
+    icon: Zap,
     description: "High-intensity megaformer sessions, tracked studio by studio.",
   },
   {
     tag: "Yoga",
+    icon: Wind,
     description: "Vinyasa, hatha, or hot yoga — every class, every location.",
   },
   {
     tag: "Personal Training",
+    icon: Users,
     description: "One-on-one and small group sessions across your client base.",
   },
 ];
 
 const FAQ = [
   {
+    icon: Building2,
     question: "Do I need a separate account for each studio?",
     answer:
       "No. One FORCOACH account holds all of your studios, each with its own compensation rate, in one place.",
   },
   {
+    icon: Clock,
     question: "What if two studios pay me differently?",
     answer:
       "Each studio has its own rate — hourly or per-class — so your earnings calculate correctly no matter how each one pays you.",
   },
   {
+    icon: CalendarDays,
     question: "Can I import my existing schedule?",
     answer:
       "Yes. You'll be able to connect Google Calendar directly or upload a CSV export of your classes.",
   },
   {
+    icon: Check,
     question: "Is my data private?",
     answer:
       "Yes. Your schedules, studios, and earnings are only ever visible to you.",
   },
   {
+    icon: HelpCircle,
     question: "What does it cost?",
     answer:
       "FORCOACH is currently in early access. Reach out after signing up and we'll walk you through it.",
@@ -299,21 +319,33 @@ export default function Home() {
             <h2 className="font-heading text-3xl font-semibold">
               How it works
             </h2>
+            <p className="mt-3 text-muted-foreground">
+              From first studio to first invoice in four steps.
+            </p>
           </Reveal>
-          <div className="mx-auto mt-12 grid max-w-5xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {STEPS.map((step, i) => (
-              <Reveal key={step.number} delay={i * 80} className="group">
-                <div className="font-heading text-sm font-semibold text-accent transition-transform duration-300 group-hover:translate-x-1">
-                  {step.number}
-                </div>
-                <h3 className="mt-2 font-heading text-base font-semibold">
-                  {step.title}
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {step.description}
-                </p>
-              </Reveal>
-            ))}
+          <div className="relative mx-auto mt-14 max-w-5xl">
+            <div
+              aria-hidden
+              className="absolute top-6 right-[12.5%] left-[12.5%] hidden h-px bg-border lg:block"
+            />
+            <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+              {STEPS.map((step, i) => (
+                <Reveal key={step.number} delay={i * 100} className="group relative">
+                  <div className="relative z-10 flex size-12 items-center justify-center rounded-full border border-border bg-card text-accent transition-all duration-300 group-hover:-translate-y-1 group-hover:border-accent/50 group-hover:shadow-md">
+                    <step.icon className="size-5" />
+                    <span className="absolute -top-1.5 -right-1.5 flex size-5 items-center justify-center rounded-full bg-accent text-[9px] font-semibold text-accent-foreground">
+                      {step.number.replace("0", "")}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-heading text-base font-semibold">
+                    {step.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {step.description}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -343,13 +375,18 @@ export default function Home() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {AUDIENCE.map((item, i) => (
               <Reveal key={item.tag} delay={i * 80}>
-                <div className="rounded-xl border border-border p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
-                  <Badge variant="outline" className="mb-2">
-                    {item.tag}
-                  </Badge>
-                  <p className="text-sm text-muted-foreground">
-                    {item.description}
-                  </p>
+                <div className="group flex items-start gap-4 rounded-xl border border-border p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-accent transition-transform duration-300 group-hover:scale-110">
+                    <item.icon className="size-5" />
+                  </div>
+                  <div>
+                    <div className="font-heading text-sm font-semibold">
+                      {item.tag}
+                    </div>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -362,18 +399,29 @@ export default function Home() {
             <h2 className="text-center font-heading text-3xl font-semibold">
               Frequently asked questions
             </h2>
+            <p className="mt-3 text-center text-muted-foreground">
+              Everything coaches usually ask before getting started.
+            </p>
             <Accordion className="mt-10 w-full">
               {FAQ.map((item) => (
                 <AccordionItem key={item.question} value={item.question}>
-                  <AccordionTrigger className="text-left transition-colors hover:text-accent">
-                    {item.question}
+                  <AccordionTrigger className="group rounded-lg px-3 text-left transition-colors hover:bg-background hover:text-accent">
+                    <span className="flex items-center gap-3">
+                      <item.icon className="size-4 shrink-0 text-accent/70 transition-colors group-hover:text-accent" />
+                      {item.question}
+                    </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
+                  <AccordionContent className="px-3 pl-10 text-muted-foreground">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
+            <div className="mt-8 flex items-center justify-center gap-2 rounded-xl border border-border bg-background p-4 text-sm text-muted-foreground">
+              <MessageCircle className="size-4 shrink-0 text-accent" />
+              Still have questions? Reach out after signing up and we&apos;ll
+              walk you through it.
+            </div>
           </Reveal>
         </section>
 

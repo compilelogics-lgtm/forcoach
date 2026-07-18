@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Wallet, TrendingUp, Trophy, Percent } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const STATS = [
-  { label: "Monthly income", value: "€5,715" },
-  { label: "Yearly income", value: "€68,430" },
-  { label: "Best studio", value: "Pilates House" },
-  { label: "Avg. class rate", value: "€91" },
+  { label: "Monthly income", value: "€5,715", icon: Wallet },
+  { label: "Yearly income", value: "€68,430", icon: TrendingUp },
+  { label: "Best studio", value: "Pilates House", icon: Trophy },
+  { label: "Avg. class rate", value: "€91", icon: Percent },
 ];
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -15,10 +16,10 @@ const CHART_POINTS =
   "0,50 30,48 60,44 90,40 120,38 150,32 180,28 210,24 240,20 270,16 300,10 330,8";
 
 const STUDIOS = [
-  { name: "Pilates House", color: "bg-accent" },
-  { name: "Reform Lab", color: "bg-foreground/70" },
-  { name: "Flow Yoga Studio", color: "bg-foreground/40" },
-  { name: "Core Movement", color: "bg-foreground/20" },
+  { name: "Pilates House", pct: 38, amount: "€2,172", color: "bg-accent" },
+  { name: "Reform Lab", pct: 29, amount: "€1,657", color: "bg-foreground/60" },
+  { name: "Flow Yoga Studio", pct: 21, amount: "€1,200", color: "bg-foreground/35" },
+  { name: "Core Movement", pct: 12, amount: "€686", color: "bg-foreground/15" },
 ];
 
 export function EarningsMock() {
@@ -58,10 +59,11 @@ export function EarningsMock() {
             key={s.label}
             className="rounded-lg border border-border bg-background p-3 transition-colors duration-300 hover:border-accent/40"
           >
-            <div className="text-[10px] uppercase tracking-wide text-muted-foreground">
+            <s.icon className="size-3.5 text-accent" />
+            <div className="mt-1.5 text-[10px] uppercase tracking-wide text-muted-foreground">
               {s.label}
             </div>
-            <div className="mt-1 font-heading text-base font-semibold">
+            <div className="font-heading text-base font-semibold">
               {s.value}
             </div>
           </div>
@@ -73,6 +75,21 @@ export function EarningsMock() {
             Income over time — last 12 months
           </div>
           <svg viewBox="0 0 330 60" className="mt-3 h-24 w-full" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="earn-area" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.28" />
+                <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path
+              d={`M${CHART_POINTS} L330,60 L0,60 Z`}
+              fill="url(#earn-area)"
+              className={cn(
+                "transition-opacity duration-700",
+                inView ? "opacity-100" : "opacity-0",
+              )}
+              style={{ transitionDelay: "1.2s" }}
+            />
             <polyline
               fill="none"
               stroke="var(--accent)"
@@ -96,12 +113,22 @@ export function EarningsMock() {
           </div>
           <div className="mt-3 space-y-2.5">
             {STUDIOS.map((s) => (
-              <div
-                key={s.name}
-                className="flex items-center gap-2 text-[11px] transition-transform duration-200 hover:translate-x-0.5"
-              >
-                <span className={`size-2 shrink-0 rounded-full ${s.color}`} />
-                <span className="text-foreground/80">{s.name}</span>
+              <div key={s.name} className="group space-y-1">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-foreground/80 transition-transform duration-200 group-hover:translate-x-0.5">
+                    {s.name}
+                  </span>
+                  <span className="text-muted-foreground">{s.amount}</span>
+                </div>
+                <div className="h-1 w-full overflow-hidden rounded-full bg-muted">
+                  <div
+                    className={cn(
+                      "h-full rounded-full transition-[width] duration-1000 ease-out",
+                      s.color,
+                    )}
+                    style={{ width: inView ? `${s.pct}%` : "0%" }}
+                  />
+                </div>
               </div>
             ))}
           </div>
