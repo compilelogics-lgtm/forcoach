@@ -32,13 +32,13 @@ export function MarketingNav() {
           : "border-transparent shadow-none",
       )}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:px-6">
         <Link href="/" className="group flex items-center">
           <Image
             src="/brand/logo-icon-charcoal.png"
             alt="FORCOACH"
-            width={44}
-            height={44}
+            width={68}
+            height={68}
             className="transition-transform duration-300 group-hover:scale-110"
           />
         </Link>
