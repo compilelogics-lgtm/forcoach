@@ -5,6 +5,8 @@ import {
   Building2,
   FileText,
   ArrowRight,
+  X,
+  Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,10 +16,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { MarketingNav } from "@/components/marketing/marketing-nav";
 import { MarketingFooter } from "@/components/marketing/marketing-footer";
 import { DashboardMock } from "@/components/marketing/dashboard-mock";
 import { EarningsMock } from "@/components/marketing/earnings-mock";
+import { StudiosMock } from "@/components/marketing/studios-mock";
 
 const FEATURES = [
   {
@@ -46,6 +55,20 @@ const FEATURES = [
   },
 ];
 
+const WITHOUT = [
+  "A different app or spreadsheet for every studio you teach at",
+  "Manually adding up hours from memory or scattered calendars",
+  "Guessing your monthly income until you sit down and calculate it",
+  "Building each invoice from scratch, studio by studio",
+];
+
+const WITH = [
+  "One account, every studio, one unified schedule",
+  "Hours tracked and totaled automatically as classes happen",
+  "Real-time earnings, broken down by studio and month",
+  "A branded invoice generated in one click, ready to send",
+];
+
 const STEPS = [
   {
     number: "01",
@@ -69,7 +92,52 @@ const STEPS = [
   },
 ];
 
-const AUDIENCE = ["Pilates", "Lagree", "Yoga", "Personal Training"];
+const AUDIENCE = [
+  {
+    tag: "Pilates",
+    description: "Reformer, mat, and tower classes across multiple studios.",
+  },
+  {
+    tag: "Lagree",
+    description: "High-intensity megaformer sessions, tracked studio by studio.",
+  },
+  {
+    tag: "Yoga",
+    description: "Vinyasa, hatha, or hot yoga — every class, every location.",
+  },
+  {
+    tag: "Personal Training",
+    description: "One-on-one and small group sessions across your client base.",
+  },
+];
+
+const FAQ = [
+  {
+    question: "Do I need a separate account for each studio?",
+    answer:
+      "No. One FORCOACH account holds all of your studios, each with its own compensation rate, in one place.",
+  },
+  {
+    question: "What if two studios pay me differently?",
+    answer:
+      "Each studio has its own rate — hourly or per-class — so your earnings calculate correctly no matter how each one pays you.",
+  },
+  {
+    question: "Can I import my existing schedule?",
+    answer:
+      "Yes. You'll be able to connect Google Calendar directly or upload a CSV export of your classes.",
+  },
+  {
+    question: "Is my data private?",
+    answer:
+      "Yes. Your schedules, studios, and earnings are only ever visible to you.",
+  },
+  {
+    question: "What does it cost?",
+    answer:
+      "FORCOACH is currently in early access. Reach out after signing up and we'll walk you through it.",
+  },
+];
 
 export default function Home() {
   return (
@@ -90,7 +158,7 @@ export default function Home() {
             automatically, and generate professional invoices — so you can
             focus on coaching, not paperwork.
           </p>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex flex-col items-center gap-3">
             <Button
               size="lg"
               render={
@@ -100,6 +168,9 @@ export default function Home() {
                 </Link>
               }
             />
+            <p className="text-xs text-muted-foreground">
+              Free during early access — no credit card required.
+            </p>
           </div>
         </section>
 
@@ -108,12 +179,45 @@ export default function Home() {
           <DashboardMock />
         </section>
 
-        {/* Problem framing */}
-        <section className="border-y border-border bg-secondary/40 px-4 py-10 sm:px-6">
-          <p className="mx-auto max-w-2xl text-center text-base font-medium text-foreground/80 sm:text-lg">
-            You teach at three studios, use three different apps, and still
-            do your invoicing in a spreadsheet at the end of the month.
-          </p>
+        {/* Without / With comparison */}
+        <section className="border-y border-border bg-secondary/40 px-4 py-16 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-heading text-3xl font-semibold">
+              You didn&apos;t become a coach to do spreadsheets
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Coaching across multiple studios shouldn&apos;t mean juggling
+              multiple systems.
+            </p>
+          </div>
+          <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">
+            <div className="rounded-xl border border-border bg-background p-6">
+              <div className="font-heading text-sm font-semibold text-muted-foreground">
+                Without FORCOACH
+              </div>
+              <ul className="mt-4 space-y-3">
+                {WITHOUT.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm">
+                    <X className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                    <span className="text-muted-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-xl border border-accent/30 bg-background p-6">
+              <div className="font-heading text-sm font-semibold text-accent">
+                With FORCOACH
+              </div>
+              <ul className="mt-4 space-y-3">
+                {WITH.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm">
+                    <Check className="mt-0.5 size-4 shrink-0 text-accent" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </section>
 
         {/* Features */}
@@ -144,11 +248,39 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Studio management detail row */}
+        <section className="border-y border-border bg-secondary/40 px-4 py-20 sm:px-6">
+          <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-2">
+            <div>
+              <h2 className="font-heading text-3xl font-semibold">
+                Manage every studio in one place
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                Add each studio you coach at with its own contact details and
+                pay rate. Mixing hourly studios and per-class studios is
+                normal — FORCOACH handles both without extra setup.
+              </p>
+              <ul className="mt-6 space-y-3 text-sm">
+                <li className="flex items-start gap-2.5">
+                  <Check className="mt-0.5 size-4 shrink-0 text-accent" />
+                  Hourly or per-class rates, set individually
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <Check className="mt-0.5 size-4 shrink-0 text-accent" />
+                  Mark a studio inactive without losing its history
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <Check className="mt-0.5 size-4 shrink-0 text-accent" />
+                  Contact info, notes, and reference IDs all in one card
+                </li>
+              </ul>
+            </div>
+            <StudiosMock />
+          </div>
+        </section>
+
         {/* How it works */}
-        <section
-          id="how-it-works"
-          className="border-y border-border bg-secondary/40 px-4 py-20 sm:px-6"
-        >
+        <section id="how-it-works" className="px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-heading text-3xl font-semibold">
               How it works
@@ -171,8 +303,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Bigger product preview */}
-        <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        {/* Earnings detail row */}
+        <section className="border-y border-border bg-secondary/40 px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-heading text-3xl font-semibold">
               See your numbers, not just your schedule
@@ -188,16 +320,47 @@ export default function Home() {
         </section>
 
         {/* Audience */}
-        <section className="border-y border-border px-4 py-14 sm:px-6">
-          <p className="text-center text-sm font-medium text-muted-foreground">
-            Built for
-          </p>
-          <div className="mt-4 flex flex-wrap justify-center gap-3">
-            {AUDIENCE.map((tag) => (
-              <Badge key={tag} variant="outline" className="px-4 py-1.5 text-sm">
-                {tag}
-              </Badge>
+        <section className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-heading text-3xl font-semibold">
+              Built for coaches like you
+            </h2>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {AUDIENCE.map((item) => (
+              <div
+                key={item.tag}
+                className="rounded-xl border border-border p-5"
+              >
+                <Badge variant="outline" className="mb-2">
+                  {item.tag}
+                </Badge>
+                <p className="text-sm text-muted-foreground">
+                  {item.description}
+                </p>
+              </div>
             ))}
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="border-y border-border bg-secondary/40 px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="text-center font-heading text-3xl font-semibold">
+              Frequently asked questions
+            </h2>
+            <Accordion className="mt-10 w-full">
+              {FAQ.map((item) => (
+                <AccordionItem key={item.question} value={item.question}>
+                  <AccordionTrigger className="text-left">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </section>
 
