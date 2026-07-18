@@ -5,6 +5,9 @@ import {
   LayoutDashboard,
   CalendarDays,
   Building2,
+  Coins,
+  FileText,
+  Settings,
   Dumbbell,
   Clock,
   Wallet,
@@ -18,6 +21,15 @@ const STATS = [
   { label: "Hours", value: "58.5", icon: Clock, trend: "+5%" },
   { label: "Earnings", value: "€5,715", icon: Wallet, trend: "+12%" },
   { label: "Pending", value: "3", icon: Hourglass, trend: null },
+];
+
+const NAV_ITEMS = [
+  { label: "Dashboard", icon: LayoutDashboard, active: true },
+  { label: "Calendar", icon: CalendarDays, active: false },
+  { label: "Studios", icon: Building2, active: false },
+  { label: "Earnings", icon: Coins, active: false },
+  { label: "Invoices", icon: FileText, active: false },
+  { label: "Settings", icon: Settings, active: false },
 ];
 
 const STUDIOS = [
@@ -52,45 +64,47 @@ export function DashboardMock() {
   return (
     <div
       ref={ref}
-      className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border bg-card shadow-[0_20px_60px_-15px_rgba(28,28,28,0.25)] transition-shadow duration-500 hover:shadow-[0_28px_70px_-15px_rgba(28,28,28,0.32)]"
+      className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-border bg-card shadow-[0_20px_60px_-15px_rgba(28,28,28,0.25)] transition-shadow duration-500 hover:shadow-[0_28px_70px_-15px_rgba(28,28,28,0.32)]"
     >
       <div className="flex">
-        <div className="hidden w-40 shrink-0 flex-col gap-1 border-r border-border bg-sidebar p-4 text-sidebar-foreground sm:flex">
-          <div className="mb-3 flex items-center gap-2 text-xs font-heading font-semibold tracking-wide">
+        <div className="hidden w-52 shrink-0 flex-col gap-1 border-r border-border bg-sidebar p-5 text-sidebar-foreground sm:flex">
+          <div className="mb-4 flex items-center gap-2 text-sm font-heading font-semibold tracking-wide">
             FORCOACH
           </div>
-          <div className="flex items-center gap-2 rounded-md bg-sidebar-accent px-2 py-1.5 text-xs text-sidebar-accent-foreground">
-            <LayoutDashboard className="size-3.5" />
-            Dashboard
-          </div>
-          <div className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/60">
-            <CalendarDays className="size-3.5" />
-            Calendar
-          </div>
-          <div className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-sidebar-foreground/60">
-            <Building2 className="size-3.5" />
-            Studios
-          </div>
+          {NAV_ITEMS.map((item) => (
+            <div
+              key={item.label}
+              className={cn(
+                "flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors",
+                item.active
+                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                  : "text-sidebar-foreground/60",
+              )}
+            >
+              <item.icon className="size-4" />
+              {item.label}
+            </div>
+          ))}
           <div className="mt-auto flex items-center gap-2 border-t border-sidebar-foreground/10 pt-3">
-            <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-sidebar-accent text-[10px] font-medium text-sidebar-accent-foreground">
+            <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-sidebar-accent text-[11px] font-medium text-sidebar-accent-foreground">
               JC
             </div>
-            <div className="text-[10px] text-sidebar-foreground/60">
+            <div className="text-xs text-sidebar-foreground/60">
               Jordan Cole
             </div>
           </div>
         </div>
-        <div className="flex-1 space-y-4 p-5 sm:p-6">
+        <div className="flex-1 space-y-5 p-6 sm:p-8">
           <div className="flex items-center justify-between">
             <div>
-              <div className="font-heading text-sm font-semibold">
+              <div className="font-heading text-base font-semibold">
                 Good morning, Jordan
               </div>
-              <div className="text-xs text-muted-foreground">
+              <div className="text-sm text-muted-foreground">
                 Here&apos;s your business this month.
               </div>
             </div>
-            <div className="hidden rounded-full bg-secondary px-2.5 py-1 text-[10px] font-medium text-secondary-foreground sm:block">
+            <div className="hidden rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground sm:block">
               July 2026
             </div>
           </div>
@@ -99,21 +113,21 @@ export function DashboardMock() {
             {STATS.map((s) => (
               <div
                 key={s.label}
-                className="rounded-lg border border-border bg-background p-3 transition-colors duration-300 hover:border-accent/40"
+                className="rounded-lg border border-border bg-background p-4 transition-colors duration-300 hover:border-accent/40"
               >
                 <div className="flex items-center justify-between">
-                  <s.icon className="size-3.5 text-accent" />
+                  <s.icon className="size-4 text-accent" />
                   {s.trend && (
-                    <span className="flex items-center gap-0.5 text-[9px] font-medium text-accent">
-                      <TrendingUp className="size-2.5" />
+                    <span className="flex items-center gap-0.5 text-[10px] font-medium text-accent">
+                      <TrendingUp className="size-3" />
                       {s.trend}
                     </span>
                   )}
                 </div>
-                <div className="mt-1.5 text-[10px] uppercase tracking-wide text-muted-foreground">
+                <div className="mt-2 text-[11px] uppercase tracking-wide text-muted-foreground">
                   {s.label}
                 </div>
-                <div className="font-heading text-lg font-semibold">
+                <div className="font-heading text-xl font-semibold">
                   {s.value}
                 </div>
               </div>
@@ -123,14 +137,14 @@ export function DashboardMock() {
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-lg border border-border bg-background p-4">
               <div className="flex items-center justify-between">
-                <div className="text-xs font-medium text-muted-foreground">
+                <div className="text-sm font-medium text-muted-foreground">
                   Monthly income
                 </div>
-                <span className="text-xs font-semibold text-foreground">
+                <span className="text-sm font-semibold text-foreground">
                   €5,715
                 </span>
               </div>
-              <svg viewBox="0 0 200 60" className="mt-2 h-14 w-full" preserveAspectRatio="none">
+              <svg viewBox="0 0 200 60" className="mt-3 h-20 w-full" preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="dash-area" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.28" />
@@ -159,17 +173,17 @@ export function DashboardMock() {
               </svg>
             </div>
             <div className="rounded-lg border border-border bg-background p-4">
-              <div className="text-xs font-medium text-muted-foreground">
+              <div className="text-sm font-medium text-muted-foreground">
                 By studio
               </div>
-              <div className="mt-2 space-y-2">
+              <div className="mt-3 space-y-3">
                 {STUDIOS.map((s) => (
-                  <div key={s.name} className="space-y-1">
-                    <div className="flex items-center justify-between text-[11px]">
+                  <div key={s.name} className="space-y-1.5">
+                    <div className="flex items-center justify-between text-xs">
                       <span className="text-foreground/80">{s.name}</span>
                       <span className="text-muted-foreground">{s.pct}%</span>
                     </div>
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
                       <div
                         className={cn(
                           "h-full rounded-full transition-[width] duration-1000 ease-out",
