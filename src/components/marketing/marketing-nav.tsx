@@ -57,8 +57,13 @@ export function MarketingNav() {
         </nav>
 
         <div className="hidden items-center gap-2 sm:flex">
-          <Button variant="ghost" render={<Link href="/login">Log in</Link>} />
           <Button
+            variant="ghost"
+            nativeButton={false}
+            render={<Link href="/login">Log in</Link>}
+          />
+          <Button
+            nativeButton={false}
             render={<Link href="/register">Get Started</Link>}
             className="transition-transform duration-200 hover:-translate-y-0.5"
           />
@@ -94,10 +99,12 @@ export function MarketingNav() {
           <div className="mt-2 flex gap-2 px-2">
             <Button
               variant="ghost"
+              nativeButton={false}
               className="flex-1"
               render={<Link href="/login">Log in</Link>}
             />
             <Button
+              nativeButton={false}
               className="flex-1"
               render={<Link href="/register">Get Started</Link>}
             />

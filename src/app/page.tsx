@@ -186,6 +186,7 @@ export default function Home() {
               <div className="mt-8 flex flex-col items-center gap-3">
                 <Button
                   size="lg"
+                  nativeButton={false}
                   className="group"
                   render={
                     <Link href="/register">
@@ -440,6 +441,7 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="secondary"
+                nativeButton={false}
                 className="group"
                 render={
                   <Link href="/register">
