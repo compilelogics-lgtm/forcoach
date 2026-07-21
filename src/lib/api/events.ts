@@ -37,3 +37,28 @@ export type ImportEventsResult = {
   created: number;
   skipped: number;
 };
+
+export type EventInput = {
+  title: string;
+  description?: string;
+  location?: string;
+  startTime: string;
+  endTime: string;
+  studioId?: string | null;
+  status?: EventStatus;
+  notes?: string;
+};
+
+export type ImportActivity = {
+  id: string;
+  user_id: string;
+  source: "google_calendar" | "csv";
+  status: "running" | "success" | "partial" | "failed";
+  records_processed: number;
+  records_created: number;
+  records_updated: number;
+  records_skipped: number;
+  error_message: string | null;
+  started_at: string;
+  finished_at: string | null;
+};
