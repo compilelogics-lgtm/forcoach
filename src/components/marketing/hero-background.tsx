@@ -5,28 +5,15 @@ export function HeroBackground() {
       data-testid="hero-background"
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      {/* Dot-grid texture, fading toward the edges */}
-      <svg
-        className="absolute inset-0 h-full w-full"
+      {/* Soft grey radial fade behind the hero copy -- subtle depth without
+          competing with the dashboard mockup below it. */}
+      <div
+        className="absolute top-[8%] left-1/2 h-[560px] w-[820px] -translate-x-1/2 rounded-full opacity-70"
         style={{
-          maskImage:
-            "radial-gradient(ellipse 65% 70% at 50% 40%, black 0%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 65% 70% at 50% 40%, black 0%, transparent 100%)",
+          background:
+            "radial-gradient(closest-side, color-mix(in oklch, var(--foreground) 7%, transparent) 0%, transparent 100%)",
         }}
-      >
-        <defs>
-          <pattern
-            id="hero-dots"
-            width="26"
-            height="26"
-            patternUnits="userSpaceOnUse"
-          >
-            <circle cx="1.6" cy="1.6" r="1.6" fill="var(--accent)" fillOpacity="0.5" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#hero-dots)" />
-      </svg>
+      />
     </div>
   );
 }

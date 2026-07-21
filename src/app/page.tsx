@@ -11,7 +11,6 @@ import {
   Dumbbell,
   Zap,
   Wind,
-  Users,
   HelpCircle,
   MessageCircle,
 } from "lucide-react";
@@ -121,11 +120,6 @@ const AUDIENCE = [
     icon: Wind,
     description: "Vinyasa, hatha, or hot yoga — every class, every location.",
   },
-  {
-    tag: "Personal Training",
-    icon: Users,
-    description: "One-on-one and small group sessions across your client base.",
-  },
 ];
 
 const FAQ = [
@@ -154,6 +148,12 @@ const FAQ = [
       "Yes. Your schedules, studios, and earnings are only ever visible to you.",
   },
   {
+    icon: Building2,
+    question: "Is this for personal trainers with their own clients?",
+    answer:
+      "No — FORCOACH is built specifically for instructors teaching group classes across multiple studios (Pilates, Lagree, yoga, and similar). If you run one-on-one personal training with your own client base, a dedicated PT platform will serve you better.",
+  },
+  {
     icon: HelpCircle,
     question: "What does it cost?",
     answer:
@@ -173,10 +173,10 @@ export default function Home() {
           <div className="relative mx-auto max-w-5xl px-4 pt-16 pb-14 text-center sm:px-6 sm:pt-24">
             <Reveal>
               <Badge variant="secondary" className="mb-6">
-                Built for independent fitness coaches
+                Built for instructors teaching across multiple studios
               </Badge>
               <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-                The operating system for fitness coaches to manage their business
+                The operating system for instructors teaching across multiple studios
               </h1>
               <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
                 Track your classes across every studio, calculate your earnings
@@ -189,13 +189,14 @@ export default function Home() {
                   className="group"
                   render={
                     <Link href="/register">
-                      Get Started
+                      Start free — no card needed
                       <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
                     </Link>
                   }
                 />
                 <p className="text-xs text-muted-foreground">
-                  Free during early access — no credit card required.
+                  Free during early access. We&apos;ll give you notice before any
+                  pricing changes — no surprise charges.
                 </p>
               </div>
             </Reveal>
@@ -372,7 +373,7 @@ export default function Home() {
               Built for coaches like you
             </h2>
           </Reveal>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {AUDIENCE.map((item, i) => (
               <Reveal key={item.tag} delay={i * 80}>
                 <div className="group flex items-start gap-4 rounded-xl border border-border p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
@@ -442,7 +443,7 @@ export default function Home() {
                 className="group"
                 render={
                   <Link href="/register">
-                    Get Started
+                    Start free — no card needed
                     <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
                   </Link>
                 }

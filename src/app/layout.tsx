@@ -15,7 +15,8 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "FORCOACH",
-  description: "Manage. Grow. Inspire. — the operating system for fitness coaches.",
+  description:
+    "Manage. Grow. Inspire. — the operating system for instructors teaching across multiple studios.",
 };
 
 export default function RootLayout({

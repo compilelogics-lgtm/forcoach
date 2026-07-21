@@ -43,8 +43,8 @@ export function MarketingFooter() {
               </span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              The operating system for fitness coaches to manage their
-              business. Manage. Grow. Inspire.
+              The operating system for instructors teaching across multiple
+              studios. Manage. Grow. Inspire.
             </p>
           </div>
           <div className="flex flex-col gap-3">
@@ -66,7 +66,7 @@ export function MarketingFooter() {
         </div>
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
           <span>© {new Date().getFullYear()} FORCOACH. All rights reserved.</span>
-          <span>Made for independent fitness coaches.</span>
+          <span>Made for instructors teaching across multiple studios.</span>
         </div>
       </div>
     </footer>
