@@ -9,6 +9,11 @@ import type {
   ImportEventRow,
   ImportEventsResult,
 } from "@/lib/api/events";
+import type {
+  GoogleCalendarOption,
+  GoogleCalendarStatus,
+  GoogleSyncResult,
+} from "@/lib/api/google-calendar";
 
 export type ImportActionState = {
   error?: string;
@@ -118,6 +123,95 @@ export async function fetchImportActivity(): Promise<{
       error: err instanceof ApiError ? err.message : "Failed to load import history",
     };
   }
+}
+
+export async function fetchGoogleStatus(): Promise<{
+  error?: string;
+  status?: GoogleCalendarStatus;
+}> {
+  try {
+    const status = await apiFetch<GoogleCalendarStatus>("/calendar/google/status");
+    return { status };
+  } catch (err) {
+    return {
+      error: err instanceof ApiError ? err.message : "Failed to load Google Calendar status",
+    };
+  }
+}
+
+export async function getGoogleConnectUrl(): Promise<{
+  error?: string;
+  url?: string;
+}> {
+  try {
+    const result = await apiFetch<{ url: string }>("/auth/google/connect");
+    return { url: result.url };
+  } catch (err) {
+    return {
+      error: err instanceof ApiError ? err.message : "Failed to start Google Calendar connection",
+    };
+  }
+}
+
+export async function fetchGoogleCalendars(): Promise<{
+  error?: string;
+  calendars?: GoogleCalendarOption[];
+}> {
+  try {
+    const calendars = await apiFetch<GoogleCalendarOption[]>("/calendar/google/calendars");
+    return { calendars };
+  } catch (err) {
+    return {
+      error: err instanceof ApiError ? err.message : "Failed to load calendars",
+    };
+  }
+}
+
+export async function selectGoogleCalendar(
+  calendarId: string,
+  calendarName: string,
+): Promise<{ error?: string; result?: GoogleSyncResult }> {
+  try {
+    const result = await apiFetch<GoogleSyncResult>("/calendar/google/select-calendar", {
+      method: "POST",
+      body: JSON.stringify({ calendarId, calendarName }),
+    });
+    revalidatePath("/calendar");
+    return { result };
+  } catch (err) {
+    return {
+      error: err instanceof ApiError ? err.message : "Failed to select calendar",
+    };
+  }
+}
+
+export async function syncGoogleCalendar(): Promise<{
+  error?: string;
+  result?: GoogleSyncResult;
+}> {
+  try {
+    const result = await apiFetch<GoogleSyncResult>("/calendar/google/sync", {
+      method: "POST",
+    });
+    revalidatePath("/calendar");
+    return { result };
+  } catch (err) {
+    return {
+      error: err instanceof ApiError ? err.message : "Failed to sync Google Calendar",
+    };
+  }
+}
+
+export async function disconnectGoogleCalendar(): Promise<{ error?: string }> {
+  try {
+    await apiFetch("/calendar/google/disconnect", { method: "DELETE" });
+    revalidatePath("/calendar");
+  } catch (err) {
+    return {
+      error: err instanceof ApiError ? err.message : "Failed to disconnect Google Calendar",
+    };
+  }
+  return {};
 }
 
 export async function setEventExcluded(

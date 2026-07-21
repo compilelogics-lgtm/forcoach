@@ -84,13 +84,22 @@ const SECTIONS: GuideSection[] = [
   {
     id: "calendar",
     question: "Calendar & schedule imports",
-    status: "soon",
+    status: "available",
     content: (
-      <p>
-        Soon you&apos;ll be able to connect your Google Calendar or upload a
-        CSV of your schedule, and view everything in one unified monthly,
-        weekly, or daily calendar — filterable by studio.
-      </p>
+      <div className="space-y-2">
+        <p>
+          Go to <strong>Calendar</strong> to bring in your classes: connect
+          your <strong>Google Calendar</strong> for automatic syncing, or{" "}
+          <strong>Import CSV</strong> for a one-off upload — either way,
+          you&apos;ll see a preview before anything is added.
+        </p>
+        <p>
+          Switch between <strong>List</strong>, <strong>Month</strong>,{" "}
+          <strong>Week</strong>, and <strong>Day</strong> views, and filter by
+          studio or search by title. Each event can be assigned to a studio,
+          edited, excluded from earnings, or deleted.
+        </p>
+      </div>
     ),
   },
   {

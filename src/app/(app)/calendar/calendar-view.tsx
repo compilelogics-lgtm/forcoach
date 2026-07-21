@@ -98,7 +98,7 @@ export function CalendarView({
       </CardHeader>
       <CardContent className="text-sm text-muted-foreground">
         {events.length === 0
-          ? "Import a CSV of your classes or add one manually to get started. Google Calendar sync is coming soon."
+          ? "Import a CSV of your classes, connect Google Calendar above, or add one manually to get started."
           : "Try a different search or studio filter."}
       </CardContent>
     </Card>
