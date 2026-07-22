@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StudioFormDialog } from "./studio-form-dialog";
 import { DeleteStudioButton } from "./delete-studio-button";
+import { CoachMark } from "@/components/onboarding/coach-mark";
 
 function formatCompensation(studio: Studio) {
   const amount = new Intl.NumberFormat("en-US", {
@@ -32,7 +33,18 @@ export default async function StudiosPage() {
             Manage the studios you coach at and their compensation rates.
           </p>
         </div>
-        <StudioFormDialog trigger={<Button>Add studio</Button>} />
+        {sorted.length === 0 ? (
+          <CoachMark
+            id="studios-add"
+            align="end"
+            title="Start here"
+            message="Add each studio you coach at, along with its pay rate (hourly or per class). You'll need this before events can be assigned for earnings tracking."
+          >
+            <StudioFormDialog trigger={<Button>Add studio</Button>} />
+          </CoachMark>
+        ) : (
+          <StudioFormDialog trigger={<Button>Add studio</Button>} />
+        )}
       </div>
 
       {sorted.length === 0 ? (

@@ -25,6 +25,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import type { GoogleCalendarOption, GoogleCalendarStatus } from "@/lib/api/google-calendar";
+import { CoachMark } from "@/components/onboarding/coach-mark";
 import {
   disconnectGoogleCalendar,
   fetchGoogleCalendars,
@@ -144,10 +145,17 @@ export function GoogleCalendarCard({
             <p className="text-sm text-muted-foreground">
               Sync classes from your Google Calendar automatically.
             </p>
-            <Button onClick={handleConnect} disabled={isPending}>
-              <Link2 className="mr-2 size-4" />
-              {isPending ? "Connecting..." : "Connect"}
-            </Button>
+            <CoachMark
+              id="calendar-connect-google"
+              align="end"
+              title="Skip manual entry"
+              message="Connect your Google Calendar once, and new classes sync in automatically (with a manual 'Sync now' anytime, plus a background sync every 6 hours)."
+            >
+              <Button onClick={handleConnect} disabled={isPending}>
+                <Link2 className="mr-2 size-4" />
+                {isPending ? "Connecting..." : "Connect"}
+              </Button>
+            </CoachMark>
           </div>
         )}
 
