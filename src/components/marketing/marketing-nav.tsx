@@ -33,14 +33,17 @@ export function MarketingNav() {
       )}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:px-6">
-        <Link href="/" className="group flex items-center">
+        <Link href="/" className="group flex items-center gap-2.5">
           <Image
             src="/brand/logo-icon-charcoal.png"
-            alt="FORCOACH"
-            width={68}
-            height={68}
+            alt=""
+            width={40}
+            height={40}
             className="transition-transform duration-300 group-hover:scale-110"
           />
+          <span className="font-heading text-lg font-semibold tracking-tight text-foreground">
+            FORCOACH
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground sm:flex">

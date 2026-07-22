@@ -72,7 +72,7 @@ export function EarningsMock() {
       <div className="mt-4 grid gap-3 sm:grid-cols-[1.4fr_1fr]">
         <div className="rounded-lg border border-border bg-background p-4">
           <div className="text-xs font-medium text-muted-foreground">
-            Income over time — last 12 months
+            Income over time, last 12 months
           </div>
           <svg viewBox="0 0 330 60" className="mt-3 h-24 w-full" preserveAspectRatio="none">
             <defs>
@@ -109,7 +109,7 @@ export function EarningsMock() {
         </div>
         <div className="rounded-lg border border-border bg-background p-4">
           <div className="text-xs font-medium text-muted-foreground">
-            Income by studio — this month
+            Income by studio, this month
           </div>
           <div className="mt-3 space-y-2.5">
             {STUDIOS.map((s) => (

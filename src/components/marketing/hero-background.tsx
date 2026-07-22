@@ -14,6 +14,14 @@ export function HeroBackground() {
             "radial-gradient(closest-side, color-mix(in oklch, var(--foreground) 7%, transparent) 0%, transparent 100%)",
         }}
       />
+      {/* Subtle boundary under the sticky nav so it doesn't blend into the hero */}
+      <div
+        className="absolute inset-x-0 top-0 h-20"
+        style={{
+          background:
+            "linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 6%, transparent) 0%, transparent 100%)",
+        }}
+      />
     </div>
   );
 }

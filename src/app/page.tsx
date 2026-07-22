@@ -47,7 +47,7 @@ const FEATURES = [
     icon: Clock,
     title: "Automatic hours tracking",
     description:
-      "Every class you teach is timed and totaled automatically — daily, weekly, monthly, and per studio.",
+      "Every class you teach is timed and totaled automatically: daily, weekly, monthly, and per studio.",
   },
   {
     icon: Building2,
@@ -118,7 +118,7 @@ const AUDIENCE = [
   {
     tag: "Yoga",
     icon: Wind,
-    description: "Vinyasa, hatha, or hot yoga — every class, every location.",
+    description: "Vinyasa, hatha, or hot yoga, every class, every location.",
   },
 ];
 
@@ -133,7 +133,7 @@ const FAQ = [
     icon: Clock,
     question: "What if two studios pay me differently?",
     answer:
-      "Each studio has its own rate — hourly or per-class — so your earnings calculate correctly no matter how each one pays you.",
+      "Each studio has its own rate, hourly or per-class, so your earnings calculate correctly no matter how each one pays you.",
   },
   {
     icon: CalendarDays,
@@ -151,7 +151,7 @@ const FAQ = [
     icon: Building2,
     question: "Is this for personal trainers with their own clients?",
     answer:
-      "No — FORCOACH is built specifically for instructors teaching group classes across multiple studios (Pilates, Lagree, yoga, and similar). If you run one-on-one personal training with your own client base, a dedicated PT platform will serve you better.",
+      "No. FORCOACH is built specifically for instructors teaching group classes across multiple studios (Pilates, Lagree, yoga, and similar). If you run one-on-one personal training with your own client base, a dedicated PT platform will serve you better.",
   },
   {
     icon: HelpCircle,
@@ -173,15 +173,15 @@ export default function Home() {
           <div className="relative mx-auto max-w-5xl px-4 pt-16 pb-14 text-center sm:px-6 sm:pt-24">
             <Reveal>
               <Badge variant="secondary" className="mb-6">
-                Built for instructors teaching across multiple studios
+                One schedule. One invoice. Every studio.
               </Badge>
               <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
                 The operating system for instructors teaching across multiple studios
               </h1>
               <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
                 Track your classes across every studio, calculate your earnings
-                automatically, and generate professional invoices — so you can
-                focus on coaching, not paperwork.
+                automatically, and generate professional invoices. Focus on
+                coaching, not paperwork.
               </p>
               <div className="mt-8 flex flex-col items-center gap-3">
                 <Button
@@ -190,14 +190,14 @@ export default function Home() {
                   className="group"
                   render={
                     <Link href="/register">
-                      Start free — no card needed
+                      Start free, no card needed
                       <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
                     </Link>
                   }
                 />
                 <p className="text-xs text-muted-foreground">
-                  Free during early access. We&apos;ll give you notice before any
-                  pricing changes — no surprise charges.
+                  Free during early access, with advance notice before any
+                  pricing changes. No surprise charges.
                 </p>
               </div>
             </Reveal>
@@ -292,7 +292,7 @@ export default function Home() {
               <p className="mt-4 text-muted-foreground">
                 Add each studio you coach at with its own contact details and
                 pay rate. Mixing hourly studios and per-class studios is
-                normal — FORCOACH handles both without extra setup.
+                normal. FORCOACH handles both without extra setup.
               </p>
               <ul className="mt-6 space-y-3 text-sm">
                 <li className="flex items-start gap-2.5">
@@ -445,7 +445,7 @@ export default function Home() {
                 className="group"
                 render={
                   <Link href="/register">
-                    Start free — no card needed
+                    Start free, no card needed
                     <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
                   </Link>
                 }
