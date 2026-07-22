@@ -100,17 +100,26 @@ export function CsvImportDialog({
 
         <div className="space-y-4">
           <div className="rounded-md border border-dashed p-4 text-sm text-muted-foreground">
-            <p className="font-medium text-foreground">Required columns</p>
-            <p className="mt-1">
-              Title, Start Date (YYYY-MM-DD), Start Time (HH:MM), End Date,
-              End Time
-            </p>
-            <p className="mt-1 font-medium text-foreground">
-              Optional columns
-            </p>
-            <p className="mt-1">
-              Studio (matched by name), Notes
-            </p>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="font-medium text-foreground">Required columns</p>
+                <p className="mt-1">
+                  Title, Start Date (YYYY-MM-DD), Start Time (HH:MM), End
+                  Date, End Time
+                </p>
+                <p className="mt-1 font-medium text-foreground">
+                  Optional columns
+                </p>
+                <p className="mt-1">Studio (matched by name), Notes</p>
+              </div>
+              <a
+                href="/templates/forcoach-csv-template.csv"
+                download
+                className="shrink-0 text-xs font-medium text-accent underline underline-offset-2 hover:no-underline"
+              >
+                Download template
+              </a>
+            </div>
           </div>
 
           <input
