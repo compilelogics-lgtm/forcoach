@@ -32,9 +32,11 @@ export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus })
   const [actionError, setError] = useState<string | undefined>();
   const [actionNotice, setNotice] = useState<string | undefined>();
   const [calendars, setCalendars] = useState<GoogleCalendarOption[] | null>(null);
+  const [pickerOpen, setPickerOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const needsCalendarSelection = status.connected && !status.calendarId;
+  const needsCalendarSelection =
+    (status.connected && !status.calendarId) || pickerOpen;
   const error = actionError ?? (googleFlag === "error"
     ? "Something went wrong connecting Google Calendar. Please try again."
     : undefined);
@@ -66,7 +68,10 @@ export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus })
     startTransition(async () => {
       const result = await selectGoogleCalendar(cal.id, cal.name);
       if (result.error) setError(result.error);
-      else setNotice(`Connected to ${cal.name}.`);
+      else {
+        setNotice(`Connected to ${cal.name}.`);
+        setPickerOpen(false);
+      }
     });
   }
 
@@ -129,7 +134,14 @@ export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus })
 
         {needsCalendarSelection && (
           <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">Choose which calendar to sync:</p>
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-muted-foreground">Choose which calendar to sync:</p>
+              {status.connected && status.calendarId && (
+                <Button variant="ghost" size="sm" onClick={() => setPickerOpen(false)}>
+                  Cancel
+                </Button>
+              )}
+            </div>
             {isPending && calendars === null ? (
               <p className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Loader2 className="size-4 animate-spin" /> Loading calendars...
@@ -160,7 +172,7 @@ export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus })
           </div>
         )}
 
-        {status.connected && status.calendarId && (
+        {status.connected && status.calendarId && !pickerOpen && (
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="text-sm">
               <p className="font-medium">{status.calendarName ?? status.calendarId}</p>
@@ -173,6 +185,17 @@ export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus })
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm" disabled={isPending} onClick={handleSync}>
                 {isPending ? "Syncing..." : "Sync now"}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={isPending}
+                onClick={() => {
+                  setCalendars(null);
+                  setPickerOpen(true);
+                }}
+              >
+                Change calendar
               </Button>
               <AlertDialog>
                 <AlertDialogTrigger
