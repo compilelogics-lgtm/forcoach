@@ -170,11 +170,12 @@ export async function fetchGoogleCalendars(): Promise<{
 export async function selectGoogleCalendar(
   calendarId: string,
   calendarName: string,
+  defaultStudioId?: string,
 ): Promise<{ error?: string; result?: GoogleSyncResult }> {
   try {
     const result = await apiFetch<GoogleSyncResult>("/calendar/google/select-calendar", {
       method: "POST",
-      body: JSON.stringify({ calendarId, calendarName }),
+      body: JSON.stringify({ calendarId, calendarName, defaultStudioId }),
     });
     revalidatePath("/calendar");
     return { result };

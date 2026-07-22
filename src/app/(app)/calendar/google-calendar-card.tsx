@@ -7,6 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -26,13 +33,20 @@ import {
   syncGoogleCalendar,
 } from "./actions";
 
-export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus }) {
+export function GoogleCalendarCard({
+  status,
+  studios,
+}: {
+  status: GoogleCalendarStatus;
+  studios: { id: string; name: string }[];
+}) {
   const params = useSearchParams();
   const googleFlag = params.get("google");
   const [actionError, setError] = useState<string | undefined>();
   const [actionNotice, setNotice] = useState<string | undefined>();
   const [calendars, setCalendars] = useState<GoogleCalendarOption[] | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [studioByCalendar, setStudioByCalendar] = useState<Record<string, string>>({});
   const [isPending, startTransition] = useTransition();
 
   const needsCalendarSelection =
@@ -65,8 +79,13 @@ export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus })
 
   function handleSelect(cal: GoogleCalendarOption) {
     setError(undefined);
+    const studioId = studioByCalendar[cal.id];
     startTransition(async () => {
-      const result = await selectGoogleCalendar(cal.id, cal.name);
+      const result = await selectGoogleCalendar(
+        cal.id,
+        cal.name,
+        studioId && studioId !== "none" ? studioId : undefined,
+      );
       if (result.error) setError(result.error);
       else {
         setNotice(`Connected to ${cal.name}.`);
@@ -151,7 +170,7 @@ export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus })
                 {(calendars ?? []).map((cal) => (
                   <div
                     key={cal.id}
-                    className="flex items-center justify-between rounded-md border px-3 py-2 text-sm"
+                    className="flex flex-wrap items-center justify-between gap-2 rounded-md border px-3 py-2 text-sm"
                   >
                     <span>
                       {cal.name}
@@ -159,9 +178,39 @@ export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus })
                         <span className="ml-1.5 text-xs text-muted-foreground">(primary)</span>
                       )}
                     </span>
-                    <Button size="sm" disabled={isPending} onClick={() => handleSelect(cal)}>
-                      Select
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Select
+                        value={studioByCalendar[cal.id] ?? "none"}
+                        onValueChange={(value) =>
+                          setStudioByCalendar((prev) => ({
+                            ...prev,
+                            [cal.id]: value ?? "none",
+                          }))
+                        }
+                      >
+                        <SelectTrigger className="h-8 text-xs">
+                          <SelectValue>
+                            {(value: string) =>
+                              value === "none"
+                                ? "No default studio"
+                                : (studios.find((s) => s.id === value)?.name ??
+                                  "No default studio")
+                            }
+                          </SelectValue>
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="none">No default studio</SelectItem>
+                          {studios.map((s) => (
+                            <SelectItem key={s.id} value={s.id}>
+                              {s.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <Button size="sm" disabled={isPending} onClick={() => handleSelect(cal)}>
+                        Select
+                      </Button>
+                    </div>
                   </div>
                 ))}
                 {calendars && calendars.length === 0 && (
@@ -180,6 +229,10 @@ export function GoogleCalendarCard({ status }: { status: GoogleCalendarStatus })
                 {status.lastSyncedAt
                   ? `Last synced ${new Date(status.lastSyncedAt).toLocaleString()}`
                   : "Not synced yet"}
+                {status.defaultStudioId &&
+                  ` · New classes default to ${
+                    studios.find((s) => s.id === status.defaultStudioId)?.name ?? "a studio"
+                  }`}
               </p>
             </div>
             <div className="flex items-center gap-2">

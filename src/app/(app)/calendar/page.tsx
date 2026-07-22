@@ -37,7 +37,7 @@ export default async function CalendarPage() {
         </div>
       </div>
 
-      <GoogleCalendarCard status={googleStatus} />
+      <GoogleCalendarCard status={googleStatus} studios={studioOptions} />
 
       <CalendarView events={events} studios={studios} />
     </div>

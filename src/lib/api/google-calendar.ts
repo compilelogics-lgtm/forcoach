@@ -6,6 +6,7 @@ export type GoogleCalendarStatus =
       calendarName: string | null;
       googleAccountEmail: string | null;
       lastSyncedAt: string | null;
+      defaultStudioId: string | null;
     };
 
 export type GoogleCalendarOption = {
