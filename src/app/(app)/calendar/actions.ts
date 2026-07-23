@@ -111,6 +111,23 @@ export async function deleteEvent(id: string): Promise<EventActionState> {
   return {};
 }
 
+export async function bulkDeleteEvents(
+  ids: string[],
+): Promise<{ error?: string; deleted?: number }> {
+  try {
+    const result = await apiFetch<{ deleted: number }>("/events/bulk-delete", {
+      method: "POST",
+      body: JSON.stringify({ ids }),
+    });
+    revalidatePath("/calendar");
+    return { deleted: result.deleted };
+  } catch (err) {
+    return {
+      error: err instanceof ApiError ? err.message : "Failed to delete events",
+    };
+  }
+}
+
 export async function fetchImportActivity(): Promise<{
   error?: string;
   activity?: ImportActivity[];

@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import type { Event } from "@/lib/api/events";
 import { EventFormDialog } from "./event-form-dialog";
 import { DeleteEventButton } from "./delete-event-button";
@@ -30,11 +31,17 @@ export function EventRow({
   studioById,
   studioOptions,
   showDate = true,
+  selectable = false,
+  selected = false,
+  onToggleSelect,
 }: {
   event: Event;
   studioById: Map<string, string>;
   studioOptions: { id: string; name: string }[];
   showDate?: boolean;
+  selectable?: boolean;
+  selected?: boolean;
+  onToggleSelect?: (checked: boolean) => void;
 }) {
   return (
     <div
@@ -43,14 +50,24 @@ export function EventRow({
         event.status === "excluded" && "opacity-50",
       )}
     >
-      <div>
-        <p className="text-sm font-medium">{event.title}</p>
-        <p className="text-xs text-muted-foreground">
-          {formatEventRange(event, showDate)}
-        </p>
-        {event.notes && (
-          <p className="text-xs text-muted-foreground mt-0.5">{event.notes}</p>
+      <div className="flex items-start gap-3">
+        {selectable && (
+          <Checkbox
+            checked={selected}
+            onCheckedChange={(checked) => onToggleSelect?.(checked === true)}
+            aria-label={`Select ${event.title}`}
+            className="mt-1"
+          />
         )}
+        <div>
+          <p className="text-sm font-medium">{event.title}</p>
+          <p className="text-xs text-muted-foreground">
+            {formatEventRange(event, showDate)}
+          </p>
+          {event.notes && (
+            <p className="text-xs text-muted-foreground mt-0.5">{event.notes}</p>
+          )}
+        </div>
       </div>
       <div className="flex items-center gap-2">
         {event.status === "excluded" ? (
