@@ -1,12 +1,18 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC_PATHS = [
+// Auth flows: logged-in users get bounced to /dashboard from these.
+const AUTH_PATHS = [
   "/login",
   "/register",
   "/forgot-password",
   "/reset-password",
 ];
+
+// Reference pages: viewable regardless of auth state, never redirected either way
+// (e.g. Google's OAuth verification reviewer needs to reach these while logged out,
+// and a logged-in user should still be able to re-read them).
+const ALWAYS_ACCESSIBLE_PATHS = ["/privacy", "/terms"];
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
@@ -40,17 +46,20 @@ export async function updateSession(request: NextRequest) {
   // "/" is public (the marketing landing page) but must be an exact match --
   // every path starts with "/", so using startsWith() here would make every
   // route public and defeat the auth guard entirely.
-  const isPublicPath =
-    pathname === "/" || PUBLIC_PATHS.some((path) => pathname.startsWith(path));
+  const isRoot = pathname === "/";
+  const isAuthPath = AUTH_PATHS.some((path) => pathname.startsWith(path));
+  const isAlwaysAccessible = ALWAYS_ACCESSIBLE_PATHS.some((path) =>
+    pathname.startsWith(path),
+  );
 
-  if (!user && !isPublicPath) {
+  if (!user && !isRoot && !isAuthPath && !isAlwaysAccessible) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("redirectTo", pathname);
     return NextResponse.redirect(url);
   }
 
-  if (user && isPublicPath) {
+  if (user && (isRoot || isAuthPath)) {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
     url.search = "";

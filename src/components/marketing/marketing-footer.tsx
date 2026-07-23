@@ -11,6 +11,11 @@ const ACCOUNT_LINKS = [
   { href: "/register", label: "Get Started" },
 ];
 
+const LEGAL_LINKS = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Service" },
+];
+
 function FooterLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
@@ -64,9 +69,19 @@ export function MarketingFooter() {
             ))}
           </div>
         </div>
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
           <span>© {new Date().getFullYear()} FORCOACH. All rights reserved.</span>
-          <span>Made for instructors teaching across multiple studios.</span>
+          <div className="flex items-center gap-4">
+            {LEGAL_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
