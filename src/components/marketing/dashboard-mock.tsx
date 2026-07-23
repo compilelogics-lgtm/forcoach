@@ -118,7 +118,7 @@ export function DashboardMock() {
       ref={ref}
       className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-border bg-card shadow-[0_20px_60px_-15px_rgba(28,28,28,0.25)] transition-shadow duration-500 hover:shadow-[0_28px_70px_-15px_rgba(28,28,28,0.32)]"
     >
-      <div className="flex">
+      <div className="flex flex-col sm:flex-row">
         <div className="hidden w-52 shrink-0 flex-col gap-1 border-r border-border bg-sidebar p-5 text-sidebar-foreground sm:flex">
           <div className="mb-4 flex items-center gap-2 text-sm font-heading font-semibold tracking-wide">
             FORCOACH
