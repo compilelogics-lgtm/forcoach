@@ -12,6 +12,11 @@ const LINKS = [
   { href: "#how-it-works", label: "How it works" },
 ];
 
+const PAGE_LINKS = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+];
+
 export function MarketingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -57,6 +62,16 @@ export function MarketingNav() {
               <span className="absolute inset-x-0 -bottom-0.5 h-px scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </a>
           ))}
+          {PAGE_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="group relative py-1 transition-colors hover:text-foreground"
+            >
+              {link.label}
+              <span className="absolute inset-x-0 -bottom-0.5 h-px scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
+            </Link>
+          ))}
         </nav>
 
         <div className="hidden items-center gap-2 sm:flex">
@@ -98,6 +113,16 @@ export function MarketingNav() {
             >
               {link.label}
             </a>
+          ))}
+          {PAGE_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className="rounded-md px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            >
+              {link.label}
+            </Link>
           ))}
           <div className="mt-2 flex gap-2 px-2">
             <Button
