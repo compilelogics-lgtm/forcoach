@@ -28,8 +28,13 @@ export default function TermsOfServicePage() {
               <p>
                 These Terms of Service (&ldquo;Terms&rdquo;) govern your
                 access to and use of FORCOACH (forcoach.io and the FORCOACH
-                web application). By creating an account or using FORCOACH,
-                you agree to these Terms.
+                web application), operated by{" "}
+                <em>
+                  [Legal entity name and registered address — France, to be
+                  confirmed]
+                </em>
+                . By creating an account or using FORCOACH, you agree to
+                these Terms.
               </p>
             </section>
 
@@ -170,9 +175,12 @@ export default function TermsOfServicePage() {
             <section>
               <h2>11. Governing law</h2>
               <p>
-                These Terms are governed by the laws applicable where
-                FORCOACH is operated, without regard to conflict-of-law
-                principles.
+                These Terms are governed by French law. Any dispute arising
+                from these Terms or your use of FORCOACH that cannot be
+                resolved informally will be subject to the exclusive
+                jurisdiction of the French courts, without prejudice to any
+                mandatory consumer-protection rights you may have under the
+                law of your own country of residence if applicable.
               </p>
             </section>
 

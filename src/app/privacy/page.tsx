@@ -31,12 +31,30 @@ export default function PrivacyPolicyPage() {
                 invoicing tool for independent fitness instructors who teach
                 across multiple studios. This policy explains what
                 information we collect through forcoach.io and the FORCOACH
-                web application, how we use it, and the choices you have.
+                web application, how we use it, and the rights you have
+                under the EU/French General Data Protection Regulation
+                (GDPR) and French data protection law (Loi Informatique et
+                Libertés).
               </p>
             </section>
 
             <section>
-              <h2>1. Information we collect</h2>
+              <h2>1. Who operates FORCOACH (data controller)</h2>
+              <p>
+                FORCOACH is operated by{" "}
+                <em>
+                  [Legal entity name and registered address — France, to be
+                  confirmed]
+                </em>
+                , which acts as the data controller for the personal data
+                described in this policy. For any privacy question or to
+                exercise your rights, contact{" "}
+                <a href="mailto:contact@forcoach.io">contact@forcoach.io</a>.
+              </p>
+            </section>
+
+            <section>
+              <h2>2. Information we collect</h2>
               <p>We collect information in the following ways:</p>
               <ul>
                 <li>
@@ -54,7 +72,7 @@ export default function PrivacyPolicyPage() {
                 <li>
                   <strong>Schedule data you import</strong>, either by
                   uploading a CSV file or by connecting a Google Calendar
-                  account (see Section 2 below for how Google data
+                  account (see Section 4 below for how Google data
                   specifically is handled).
                 </li>
                 <li>
@@ -68,7 +86,30 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>2. Google Calendar data specifically</h2>
+              <h2>3. Legal basis for processing (GDPR Article 6)</h2>
+              <p>We process your personal data on the following legal bases:</p>
+              <ul>
+                <li>
+                  <strong>Performance of a contract</strong>: to create your
+                  account and provide the core FORCOACH service (scheduling,
+                  earnings, invoicing) you&apos;ve signed up for.
+                </li>
+                <li>
+                  <strong>Consent</strong>: for optional features you
+                  explicitly opt into, such as connecting Google Calendar.
+                  You can withdraw this consent at any time by disconnecting
+                  the integration.
+                </li>
+                <li>
+                  <strong>Legitimate interest</strong>: to keep the service
+                  secure, prevent misuse, and maintain essential operational
+                  logs, balanced against your right to privacy.
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>4. Google Calendar data specifically</h2>
               <p>
                 If you choose to connect Google Calendar, FORCOACH requests
                 read-only access
@@ -121,7 +162,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>3. How we use your information</h2>
+              <h2>5. How we use your information</h2>
               <ul>
                 <li>To provide, operate, and maintain the FORCOACH service.</li>
                 <li>
@@ -137,7 +178,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>4. Where your data is stored</h2>
+              <h2>6. Where your data is stored and international transfers</h2>
               <p>
                 Your account and application data is stored with Supabase,
                 our database and authentication provider, over encrypted
@@ -146,10 +187,19 @@ export default function PrivacyPolicyPage() {
                 data processors and only handle data as needed to operate
                 FORCOACH.
               </p>
+              <p>
+                <em>
+                  [Data hosting region to be confirmed: if our database
+                  region is outside the EU/EEA, this section will be updated
+                  to name the specific safeguard relied on for the transfer,
+                  such as the European Commission&apos;s Standard
+                  Contractual Clauses.]
+                </em>
+              </p>
             </section>
 
             <section>
-              <h2>5. Data retention and deletion</h2>
+              <h2>7. Data retention and deletion</h2>
               <p>
                 We retain your account and schedule data for as long as your
                 account is active. If you&apos;d like your account and
@@ -161,26 +211,75 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>6. Cookies</h2>
+              <h2>8. Cookies</h2>
               <p>
                 FORCOACH uses only the essential cookies needed to keep you
                 signed in and to remember basic preferences. We do not use
-                third-party advertising or tracking cookies.
+                third-party advertising or tracking cookies, and because
+                these cookies are strictly necessary for the service to
+                function, they do not require separate consent under the
+                ePrivacy Directive.
               </p>
             </section>
 
             <section>
-              <h2>7. Your rights</h2>
+              <h2>9. Your rights</h2>
               <p>
-                Depending on where you live, you may have rights to access,
-                correct, export, or delete your personal data. To exercise
-                any of these rights, contact us at{" "}
+                Under the GDPR and French data protection law, you have the
+                right to:
+              </p>
+              <ul>
+                <li>
+                  <strong>Access</strong> the personal data we hold about
+                  you.
+                </li>
+                <li>
+                  <strong>Rectify</strong> inaccurate or incomplete data.
+                </li>
+                <li>
+                  <strong>Erase</strong> your data (&ldquo;right to be
+                  forgotten&rdquo;), subject to any legal retention
+                  requirements.
+                </li>
+                <li>
+                  <strong>Restrict</strong> or <strong>object to</strong>{" "}
+                  certain processing of your data.
+                </li>
+                <li>
+                  <strong>Port</strong> your data to another service in a
+                  structured, commonly used format.
+                </li>
+                <li>
+                  <strong>Withdraw consent</strong> at any time, for
+                  processing based on consent (such as the Google Calendar
+                  connection), without affecting the lawfulness of
+                  processing before withdrawal.
+                </li>
+                <li>
+                  <strong>Lodge a complaint</strong> with France&apos;s data
+                  protection authority, the{" "}
+                  <a
+                    href="https://www.cnil.fr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    CNIL (Commission Nationale de l&apos;Informatique et des
+                    Libertés)
+                  </a>
+                  , if you believe your data protection rights have been
+                  violated.
+                </li>
+              </ul>
+              <p>
+                To exercise any of these rights, contact us at{" "}
                 <a href="mailto:contact@forcoach.io">contact@forcoach.io</a>.
+                We&apos;ll respond within the timeframe required by
+                applicable law.
               </p>
             </section>
 
             <section>
-              <h2>8. Children&apos;s privacy</h2>
+              <h2>10. Children&apos;s privacy</h2>
               <p>
                 FORCOACH is intended for use by adults operating a coaching
                 business and is not directed at children. We do not
@@ -189,7 +288,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>9. Changes to this policy</h2>
+              <h2>11. Changes to this policy</h2>
               <p>
                 We may update this policy as FORCOACH evolves. If we make
                 material changes, we&apos;ll update the &ldquo;Last
@@ -199,7 +298,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>10. Contact us</h2>
+              <h2>12. Contact us</h2>
               <p>
                 Questions about this policy or your data? Email us at{" "}
                 <a href="mailto:contact@forcoach.io">contact@forcoach.io</a>.
